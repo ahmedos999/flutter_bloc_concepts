@@ -49,9 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
                 if (state.isIncrement) {
@@ -68,16 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
+                ElevatedButton(
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).increment();
                     },
-                    child: const Text('incremant')),
-                TextButton(
+                    child: const Text('Incremant')),
+                const SizedBox(
+                  width: 5,
+                ),
+                ElevatedButton(
                     onPressed: () {
                       BlocProvider.of<CounterCubit>(context).decrement();
                     },
-                    child: const Text('decremant')),
+                    child: const Text('Decremant')),
               ],
             )
           ],
