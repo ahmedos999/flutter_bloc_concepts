@@ -7,29 +7,16 @@ import 'package:flutter_bloc_concepts/presentation/screens/second.dart';
 import 'package:flutter_bloc_concepts/presentation/screens/third.dart';
 
 class AppRoute {
-  final CounterCubit _counterCubit = CounterCubit();
   Route? onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case '/':
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-                  value: _counterCubit,
-                  child: HomeScreen(title: 'Home 1'),
-                ));
+        return MaterialPageRoute(builder: (_) => HomeScreen(title: 'Home 1'));
       case '/second':
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-                value: _counterCubit, child: SecScreen(title: 'Home 2')));
+        return MaterialPageRoute(builder: (_) => SecScreen(title: 'Home 2'));
       case '/third':
-        return MaterialPageRoute(
-            builder: (_) => BlocProvider.value(
-                value: _counterCubit, child: ThirdScreen(title: 'Home 3')));
+        return MaterialPageRoute(builder: (_) => ThirdScreen(title: 'Home 3'));
       default:
         return null;
     }
-  }
-
-  void dispose() {
-    _counterCubit.isClosed;
   }
 }
