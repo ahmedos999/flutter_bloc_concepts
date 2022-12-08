@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_bloc_concepts/business_logic/cubit/internet_cubit.dart';
-import 'package:flutter_bloc_concepts/constants/enums.dart';
 
 part 'counter_state.dart';
 

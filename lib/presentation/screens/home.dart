@@ -62,6 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
+              ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/third');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('go to Third Screen'),
+                  )),
               BlocConsumer<CounterCubit, CounterState>(
                 listener: (context, state) {
                   if (state.isIncrement) {

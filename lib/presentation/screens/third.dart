@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_concepts/business_logic/cubit/testcounter_cubit.dart';
 
 class ThirdScreen extends StatefulWidget {
   String title;
@@ -17,6 +18,7 @@ const snackBar = SnackBar(
 class _ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
+    print('Building...');
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -25,15 +27,11 @@ class _ThirdScreenState extends State<ThirdScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                if (state.isIncrement) {
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              },
+            BlocBuilder<TestcounterCubit, TestcounterState>(
               builder: (context, state) {
+                print('building from the other side !!!');
                 return Text(
-                  state.counterValue.toString(),
+                  state.product.length.toString(),
                   style: Theme.of(context).textTheme.headline4,
                 );
               },
@@ -43,17 +41,10 @@ class _ThirdScreenState extends State<ThirdScreen> {
               children: [
                 ElevatedButton(
                     onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).increment();
+                      BlocProvider.of<TestcounterCubit>(context)
+                          .incementcount(1, 'a');
                     },
-                    child: const Text('Incremant')),
-                const SizedBox(
-                  width: 5,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    child: const Text('Decremant')),
+                    child: const Text('Change')),
               ],
             ),
           ],
