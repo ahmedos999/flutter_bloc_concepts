@@ -12,7 +12,11 @@ class AppRoute {
     TestcounterCubit testcounterCubit = TestcounterCubit();
     switch (routeSettings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => HomeScreen(title: 'Home 1'));
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider.value(
+                  value: testcounterCubit,
+                  child: HomeScreen(title: 'Home 1'),
+                ));
       case '/second':
         return MaterialPageRoute(builder: (_) => SecScreen(title: 'Home 2'));
       case '/third':
