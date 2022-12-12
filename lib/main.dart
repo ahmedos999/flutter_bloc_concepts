@@ -5,9 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/counter_cubit.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/internet_cubit.dart';
+import 'package:flutter_bloc_concepts/business_logic/utility/app_bloc_observer.dart';
 import 'package:flutter_bloc_concepts/presentation/router/app_router.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: await getApplicationDocumentsDirectory());
+
+  Bloc.observer = AppBlocObserver();
   runApp(MyApp(
     appRoute: AppRoute(),
     connectivity: Connectivity(),
