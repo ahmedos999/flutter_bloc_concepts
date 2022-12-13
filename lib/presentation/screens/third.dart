@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_concepts/business_logic/cubit/counter_cubit.dart';
+import 'package:flutter_bloc_concepts/business_logic/bloc/bloc/wishlist_bloc.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/testcounter_cubit.dart';
+import 'package:flutter_bloc_concepts/data/models/product_model.dart';
 
 class ThirdScreen extends StatefulWidget {
   String title;
@@ -23,32 +24,35 @@ class _ThirdScreenState extends State<ThirdScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<TestcounterCubit, TestcounterState>(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+            height: 500,
+            child: BlocBuilder<TestcounterCubit, TestcounterState>(
               builder: (context, state) {
-                print('building from the other side !!!');
-                return Text(
-                  state.product.length.toString(),
-                  style: Theme.of(context).textTheme.headline4,
-                );
+                return ListView.builder(
+                    itemCount: state.product.length,
+                    itemBuilder: ((context, index) {
+                      return ListTile(
+                        title: Text(state.product[index].id.toString()),
+                        subtitle: Text(state.product[index].name),
+                      );
+                    }));
               },
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: () {
-                      BlocProvider.of<TestcounterCubit>(context)
-                          .incementcount(1, 'a');
-                    },
-                    child: const Text('Change')),
-              ],
-            ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    context.read<TestcounterCubit>().incementcount(1, 'a');
+                  },
+                  child: const Text('Change')),
+            ],
+          ),
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

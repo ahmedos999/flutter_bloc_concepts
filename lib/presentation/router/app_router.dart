@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_concepts/business_logic/bloc/bloc/wishlist_bloc.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/counter_cubit.dart';
 import 'package:flutter_bloc_concepts/business_logic/cubit/testcounter_cubit.dart';
 import 'package:flutter_bloc_concepts/presentation/screens/home.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_bloc_concepts/presentation/screens/third.dart';
 class AppRoute {
   Route? onGenerateRoute(RouteSettings routeSettings) {
     TestcounterCubit testcounterCubit = TestcounterCubit();
+    WishlistBloc wishlistBloc = WishlistBloc();
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(

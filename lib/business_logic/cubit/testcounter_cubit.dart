@@ -14,8 +14,7 @@ class TestcounterCubit extends Cubit<TestcounterState> {
   //   emit(TestcounterState(product: state.product));
   // }
   void incementcount(id, name) {
-    List<Product> temp = state.product;
-    temp.add(Product(id, name));
-    emit(state.copyWith(products: temp));
+    emit(TestcounterState(
+        product: List.from(state.product)..add(Product(id, name))));
   }
 }
